@@ -26,7 +26,7 @@ Reserve the full **two minutes for actual interaction**. Narrate briefly while c
 
 | Time | Live action | One-line message |
 |---|---|---|
-| 1:10–1:40 | **Agent → 30-day EB → Latest future forecast**. Ask: “Which locations should we inspect first, and why?” Show the answer and ranking. | “Statistical models rank the locations; the Agent explains the selected evidence and uncertainty.” |
+| 1:10–1:40 | **Open Agent → 30-day EB → Latest future forecast**. Ask: “Which locations should we inspect first, and why?” Show the answer and ranking. | “Statistical models rank the locations; the Agent explains the selected evidence and uncertainty.” |
 | 1:40–2:00 | **Map preview**: play the timeline briefly, then **Evidence**: open one location/source report. | “Each priority has evidence an analyst can inspect.” |
 | 2:00–2:30 | **Forward outlook → Next 30 days → Historical backtest**. Select **2026-06-30**, generate and reveal outcomes. | “This replay covers 46 later reports with EB versus 36 with recent rate, at the same inspection budget.” |
 | 2:30–3:10 | Switch to **Future forecast**, generate, select a location, mark **Worth inspecting**, add a note, save and **Export inspection shortlist**. | “The output is a documented human review plan.” |
