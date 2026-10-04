@@ -2129,3 +2129,11 @@ body { color:#eef5fa; background-color:#060e16; }
 .admin-dashboard :is(.panel-heading span,.stat-label,.muted) { color:#c5d8e6; }
 .admin-dashboard .notice { background-color:#203847; color:#dceaf3; }
 .admin-dashboard a { color:#b7e7ff; }
+
+/* Breakpoint changes must not animate desktop sidebar offsets on phones. */
+@media (max-width: 760px) {
+  .admin-topbar,
+  .admin-sidebar {
+    transition: none;
+  }
+}
