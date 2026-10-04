@@ -497,23 +497,6 @@ function App() {
                 }}
               />
             )}
-            {tab === "Automatic evaluation" && (
-              <OptimizationPanel
-                result={optimization}
-                busy={optimizing}
-                error={optimizationError}
-                config={config}
-                onRun={runOptimization}
-                onApply={() => {
-                  if (!optimization) return;
-                  savePlan();
-                  setPlaying(false);
-                  setPlayDate(null);
-                  setConfig({ ...config, weights: [...optimization.weights] });
-                  setTab("Plan comparison");
-                }}
-              />
-            )}
             <div hidden={tab !== "Forward outlook"}>
               <ForecastPanel
                 data={data}
@@ -574,8 +557,8 @@ function App() {
                   Current weights · exploratory 90-day history → next 30 days.
                   Coverage measures later recorded events at selected locations,
                   not safety improvement. Changing controls recomputes these
-                  results; use Automatic evaluation for a separate search and
-                  validation process.
+                  results; use the Agent’s historical evidence tools for a separate
+                  search and validation process.
                 </p>
                 <table>
                   <thead>
@@ -611,7 +594,23 @@ function App() {
                 </table>
               </div>
             )}
-            {tab === "Agent" && <AgentPage data={data} historical={{scope:activeConfig,selected:plan.selected,rows:plan.top.map((r:any)=>({...r,reportEvidence:selectEvents(data.events,activeConfig).filter((e:any)=>e.location===r.id).slice(-3)}))}} />}
+            {tab === "Agent" && <AgentPage data={data} evaluation={optimization && ["period", "category", "weather", "capacity", "typeWeights", "typeWeightMode"].every(key => JSON.stringify((optimization.filters as unknown as Record<string, unknown>)[key]) === JSON.stringify((config as unknown as Record<string, unknown>)[key])) ? optimization : null} evaluationTools={<>
+              <OptimizationPanel
+                result={optimization}
+                busy={optimizing}
+                error={optimizationError}
+                config={config}
+                onRun={runOptimization}
+                onApply={() => {
+                  if (!optimization) return;
+                  savePlan();
+                  setPlaying(false);
+                  setPlayDate(null);
+                  setConfig({ ...config, weights: [...optimization.weights] });
+                  setTab("Plan comparison");
+                }}
+              />
+ </>} historical={{scope:activeConfig,selected:plan.selected,rows:plan.top.map((r:any)=>({...r,reportEvidence:selectEvents(data.events,activeConfig).filter((e:any)=>e.location===r.id).slice(-3)}))}} />}
             {tab === "Data & method" && <DataMethodPage />}
           </div>
         </section>

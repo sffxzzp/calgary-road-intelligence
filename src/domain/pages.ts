@@ -12,13 +12,11 @@ export function pageControls(tab: string) {
       "Map preview",
       "Evidence",
       "Plan comparison",
-      "Automatic evaluation",
       "Historical evaluation",
     ].includes(tab),
     capacity: [
       "Map preview",
       "Plan comparison",
-      "Automatic evaluation",
       "Historical evaluation",
     ].includes(tab),
     weights: [

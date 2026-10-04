@@ -4,7 +4,6 @@ export const dashboardPages = [
   "Map preview",
   "Evidence",
   "Plan comparison",
-  "Automatic evaluation",
   "Forward outlook",
   "Weather context",
   "Historical evaluation",

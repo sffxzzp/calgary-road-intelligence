@@ -40,7 +40,7 @@ export function DashboardSummary({
         hidden={["Forward outlook", "Data & method", "Agent"].includes(tab)}
       >
         <div
-          hidden={["Automatic evaluation", "Historical evaluation"].includes(
+          hidden={["Historical evaluation"].includes(
             tab,
           )}
         >
@@ -49,7 +49,7 @@ export function DashboardSummary({
           <small>in selected period</small>
         </div>
         <div
-          hidden={["Automatic evaluation", "Historical evaluation"].includes(
+          hidden={["Historical evaluation"].includes(
             tab,
           )}
         >
@@ -68,7 +68,7 @@ export function DashboardSummary({
             {config.period} · {config.category}
           </strong>
           <small className="summary-date">
-            {["Automatic evaluation", "Historical evaluation"].includes(tab)
+            {["Historical evaluation"].includes(tab)
               ? "Fixed historical evaluation windows"
               : `${config.start} ~ ${activeConfig.end}`}
             {controlVisibility.weather && config.weather !== "All weather"
