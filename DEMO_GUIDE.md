@@ -10,24 +10,28 @@ The site opens on **Map preview**, with **Agent second** in the sidebar. Verify 
 
 “We’re [team name]. Calgary Road Intelligence helps road analysts decide which locations to inspect first, understand the evidence, and plan ahead.”
 
-## Problem Statement — 0:10–1:10
+## Problem Statement and Our Solution — 0:10–1:10
 
-**Say:** “Municipal road analysts need to decide where to send a limited inspection team. Our dashboard contains 27,805 traffic reports across 9,661 observed locations, including crashes, stalls and other disruptions. A long report list does not explain which sites deserve attention or preserve the reasoning behind a decision.
+**Problem:** Municipal road teams have limited inspection capacity. With 27,805 reports across 9,661 observed locations, analysts need to answer: **Where should we inspect first, and why?** Reports include crashes, stalls and other disruptions.
 
-“Ranking by recent report frequency is a useful starting point. We combine inspectable historical evidence with a forward outlook, then let analysts ask why a location is ranked and document their review. Across six exploratory monthly replays, EB covers 36.8 subsequent reports versus 33.0 for recent rate at the same Top20 budget—about 12% more. That measures report coverage, not proven safety or financial benefit.”
+**Current approach and gap:** Recent report frequency is a useful baseline, but a count alone does not explain recent changes or recurrence, estimate future activity, or preserve the reasoning behind an inspection decision.
 
-**Transition:** “Let’s show how an analyst goes from reports to a review plan.”
+**Say:** “Our solution connects four steps. Historical analysis turns reports into an evidence-backed priority list. EB forecasts help analysts plan ahead. The Agent explains the supplied rankings, reasons and uncertainty. Finally, analysts review a location, record their decision and export an inspection plan.”
+
+**Transition:** “Let’s follow that workflow: identify a priority, check its evidence, look ahead, and document the decision.”
+
+Keep this section to one minute. Show the measured comparison during the live replay rather than adding another explanation here.
 
 ## Live demonstration — 1:10–3:10
 
 Reserve the full **two minutes for actual interaction**. Narrate briefly while clicking; do not add a separate feature tour.
 
-| Time | Live action | One-line message |
+| Time | Problem addressed | Live action and message |
 |---|---|---|
-| 1:10–1:40 | **Open Agent → 30-day EB → Latest future forecast**. Ask: “Which locations should we inspect first, and why?” Show the answer and ranking. | “Statistical models rank the locations; the Agent explains the selected evidence and uncertainty.” |
-| 1:40–2:00 | **Map preview**: play the timeline briefly, then **Evidence**: open one location/source report. | “Each priority has evidence an analyst can inspect.” |
-| 2:00–2:30 | **Forward outlook → Next 30 days → Historical backtest**. Select **2026-06-30**, generate and reveal outcomes. | “This replay covers 46 later reports with EB versus 36 with recent rate, at the same inspection budget.” |
-| 2:30–3:10 | Switch to **Future forecast**, generate, select a location, mark **Worth inspecting**, add a note, save and **Export inspection shortlist**. | “The output is a documented human review plan.” |
+| 1:10–1:35 | Which locations deserve attention first? | **Map preview**: show the historical Top20 and briefly play the timeline. **Evidence**: open one location/source report. “We prioritize using frequency, recent growth and recurrence, with reports an analyst can inspect.” |
+| 1:35–2:05 | What may need attention next month? | **Forward outlook → Next 30 days → Historical backtest**. Select **2026-06-30**, generate and reveal outcomes. “At the same Top20 budget, EB covers 46 later reports versus 36 for recent rate. Across six exploratory replays, the averages are 36.8 versus 33.0—about 12% more report coverage.” |
+| 2:05–2:35 | How can an analyst understand the model’s priorities? | **Agent → 30-day EB → Latest future forecast**. Ask: “Which locations should we inspect first, and why?” Show the answer and ranking. “Statistical models produce the ranks; the Agent explains selected evidence and uncertainty.” |
+| 2:35–3:10 | How does analysis become a usable inspection plan? | Return to **Forward outlook**, switch to **Future forecast**, generate and select a location. Mark **Worth inspecting**, add a note, save and **Export inspection shortlist**. “The analyst makes and documents the final review decision.” |
 
 If Agent latency uses too much time, show a genuine prepared response and continue. If behind schedule, skip timeline playback. Keep the replay comparison and review/export. Use screenshots if map tiles fail.
 
