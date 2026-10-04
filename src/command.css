@@ -2137,3 +2137,22 @@ body { color:#eef5fa; background-color:#060e16; }
     transition: none;
   }
 }
+
+/* Gold actions need dark text, including hover and disabled states. */
+.admin-dashboard button.primary,
+.admin-dashboard button.primary:not(.active):not([aria-pressed="true"]):hover {
+  color: #16222b;
+  background: linear-gradient(120deg, #ffe0a9, #ffbb78);
+  border-color: #f4c18a;
+  font-weight: 700;
+  text-shadow: none;
+}
+.admin-dashboard button.primary:disabled {
+  color: #37434a;
+  background: #bca58a;
+  border-color: #a18c73;
+  box-shadow: none;
+}
+.admin-dashboard button.primary :is(span,strong,small) {
+  color: inherit;
+}
