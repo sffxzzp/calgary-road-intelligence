@@ -1,4 +1,5 @@
-export function DataMethodPage() {
+import type { Dataset } from "./domain/types";
+export function DataMethodPage({data}: {data: Dataset}) {
   return (
     <div className="method">
       <h2>Data sources & methodology</h2>
@@ -15,26 +16,38 @@ export function DataMethodPage() {
             "Traffic Incidents",
             "City of Calgary",
             "https://data.calgary.ca/Transportation-Transit/Traffic-Incidents/35ra-9556",
-            "27,805 reports from UTC January 2023 through October 2026. Primary event evidence, ranking and forecasting. Includes generic and unverified traffic disruptions.",
+            `${data.audit.events.toLocaleString()} reports in the dashboard snapshot, local dates ${data.audit.first} ~ ${data.audit.last}; ${data.locations.length.toLocaleString()} observed road/grid locations. UTC source records start in January 2023, which includes local December 31, 2022. The separate offline EB pipeline uses the longer official archive with rolling three-year/monthly and five-year/annual histories.`,
           ],
           [
             "Street Centreline",
             "City of Calgary",
             "https://data.calgary.ca/Transportation-Transit/Street-Centreline/4dx8-rtm5",
-            "120,567 road segments. Spatial association and road geometry; current inventory does not certify historical road identity.",
+            `${Number(data.audit.roads).toLocaleString()} road segments in the full city inventory. EB also derives 46,007 intersections (166,574 forecast units in total); these differ from the dashboard’s observed road/grid groups. Current geometry does not certify historical road identity.`,
           ],
           [
             "Traffic Volumes 2024",
             "City of Calgary",
             "https://data.calgary.ca/dataset/Traffic-Volumes-for-2024/cauu-7hnw",
-            "334 count sections. Nearby average-weekday traffic context only; proximity linkage and year mismatch prevent treating it as verified event exposure.",
+            `${Number((data.audit.volumes as {sections: number}).sections).toLocaleString()} count sections in dashboard context. Nearby average-weekday traffic context only; proximity linkage and year mismatch prevent treating it as verified event exposure.`,
           ],
           [
             "Hourly Historical Weather",
             "Environment and Climate Change Canada",
             "https://climate.weather.gc.ca/climate_data/hourly_data_e.html?StationID=50430",
-            "2023–2026 snapshot: 32,922 hours at CALGARY INTL A, station 50430. Temperature, reported weather and visibility; source MST timestamps are converted to UTC before event matching. Airport observations are not road-surface measurements.",
+            `${Number(data.weather.audit.hours).toLocaleString()} hourly observations, ${data.weather.audit.firstUTC} ~ ${data.weather.audit.lastUTC}, at CALGARY INTL A (50430). Source local standard time (UTC−7) is converted to UTC before event matching. Airport weather is context, not road-surface measurement or a feature in the deployed EB models.`,
           ],
+          ...[
+            ["Traffic Volumes 2016", "6wve-2ets"], ["Traffic Volumes 2017", "nvuz-qykn"],
+            ["Traffic Volumes 2018", "wwf6-cpsg"], ["Traffic Volumes 2019", "qeqv-tb2c"],
+            ["Traffic Volumes 2022", "57me-rcwr"], ["Traffic Volumes 2023", "bjag-w7zi"],
+          ].map(([name, id]) => [name, "City of Calgary", `https://data.calgary.ca/d/${id}`,
+            "Yearly average-weekday traffic counts used by the offline EB pipeline. 2020–2021 releases are unavailable; missing exposure and publication-date uncertainty limit interpretation."]),
+          ...[
+            ["Traffic Signals", "qr97-4jvx"], ["Traffic Signs", "u6ce-yibw"], ["Crosswalks", "hxgg-rpad"],
+          ].map(([name, id]) => [name, "City of Calgary", `https://data.calgary.ca/d/${id}`,
+            "Current asset inventory supplies EB site characteristics and treatment-screening context. Undated assets and unknown removals prevent verified historical reconstruction."]),
+          ["Crash Modification Factors", "FHWA CMF Clearinghouse", "https://www.cmfclearinghouse.org/",
+            "External crash-treatment studies inform demonstration review suggestions. CMFs are not calibrated to Calgary traffic reports and do not establish avoided reports or safety gains."],
           [
             "Hackathon Starter Dataset",
             "IEEE case repository",
@@ -99,8 +112,13 @@ export function DataMethodPage() {
       </p>
       <h3>Scoring and interpretation</h3>
       <p>
-        Forecast fitting uses 2023–2025 histories and internal 2025 tuning; 2026
-        is held out for evaluation. The default map scope is the latest 90 days.
+        The 7-day Ridge Poisson model tunes on 2023→2024 and 2023–2024→2025
+        folds, with 2026 replay outcomes reserved for evaluation. The 30-day
+        model uses pure Empirical Bayes with rolling three-year history; the
+        12-month model uses EB with rolling five-year history. Latest future
+        snapshots can include completed 2026 observations in their training
+        history; each historical replay only uses evidence before its cutoff.
+        These are distinct fitting and replay workflows, not one fixed training split. The default map scope is the latest 90 days.
         Weather observations cover January 2023 through October 2026; missing
         station measurements remain explicitly unavailable. Frequency uses
         normalized log count; recent growth compares two 30-day windows with

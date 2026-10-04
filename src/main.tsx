@@ -437,7 +437,7 @@ function App() {
             activeConfig={activeConfig}
             controlVisibility={controlVisibility}
           />
-          <AnalysisControls
+          {tab !== "Agent" && <AnalysisControls
             tab={tab}
             config={config}
             setConfig={setConfig}
@@ -446,7 +446,7 @@ function App() {
             plan={plan}
             savePlan={savePlan}
             change={change}
-          />{" "}
+          />}
           <MapPreview
             tab={tab}
             mapShell={mapShell}
@@ -611,7 +611,7 @@ function App() {
                 }}
               />
  </>} historical={{scope:activeConfig,selected:plan.selected,rows:plan.top.map((r:any)=>({...r,reportEvidence:selectEvents(data.events,activeConfig).filter((e:any)=>e.location===r.id).slice(-3)}))}} />}
-            {tab === "Data & method" && <DataMethodPage />}
+            {tab === "Data & method" && <DataMethodPage data={data} />}
           </div>
         </section>
       </main>

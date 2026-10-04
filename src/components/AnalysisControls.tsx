@@ -58,7 +58,7 @@ export function AnalysisControls({
     <>
       {" "}
       <div
-        hidden={["Forward outlook", "Data & method"].includes(tab)}
+        hidden={["Forward outlook", "Data & method", "Agent"].includes(tab)}
         className={`page-controls ${tab === "Evidence" ? "evidence-controls" : ""}`}
       >
         <details className="dashboard-controls">

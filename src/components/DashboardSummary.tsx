@@ -15,13 +15,13 @@ export function DashboardSummary({
             <span>TRAFFIC EVENT RECORDS</span>
             <strong>{data.audit.events.toLocaleString()}</strong>
             <small>
-              UTC-year 2025 · {data.audit.duplicates} duplicates removed
+              UTC source · {data.audit.duplicates} duplicates removed
             </small>
           </div>
           <div>
             <span>ROAD SEGMENTS</span>
             <strong>{data.audit.roads.toLocaleString()}</strong>
-            <small>City street-centreline snapshot</small>
+            <small>Full city street-centreline inventory</small>
           </div>
           <div>
             <span>WEATHER OBSERVATIONS</span>
@@ -30,8 +30,8 @@ export function DashboardSummary({
           </div>
           <div>
             <span>DATA COVERAGE</span>
-            <strong className="summary-context">2025 snapshot</strong>
-            <small>Traffic · roads · weather · 2024 traffic volumes</small>
+            <strong className="summary-context">{data.audit.first} ~ {data.audit.last}</strong>
+            <small>Local dates · America/Edmonton</small>
           </div>
         </div>
       )}
