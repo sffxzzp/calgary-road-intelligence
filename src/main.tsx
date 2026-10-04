@@ -410,7 +410,7 @@ function App() {
       <main
         className={`admin-dashboard dashboard ${tab === "Map preview" ? "preview-page" : "analysis-page"}`}
       >
-        <DashboardSidebar pages={pages} tab={tab} setTab={setTab} />
+        <DashboardSidebar data={data} pages={pages} tab={tab} setTab={setTab} />
         <section className="center admin-workspace">
           {warning && (
             <div className="notice" role="status">
@@ -551,14 +551,14 @@ function App() {
             {tab === "Weather context" && (
               <WeatherPanel data={data} config={activeConfig} />
             )}
-            {tab === "Historical evaluation" && (
-              <div className="evaluation">
+            {tab === "Agent" && <AgentPage data={data} evaluation={optimization && ["period", "category", "weather", "capacity", "typeWeights", "typeWeightMode"].every(key => JSON.stringify((optimization.filters as unknown as Record<string, unknown>)[key]) === JSON.stringify((config as unknown as Record<string, unknown>)[key])) ? optimization : null} evaluationTools={<>
+<details><summary>Current plan backtest · 90-day history → next 30 days</summary>              <div className="evaluation">
                 <p>
                   Current weights · exploratory 90-day history → next 30 days.
                   Coverage measures later recorded events at selected locations,
                   not safety improvement. Changing controls recomputes these
-                  results; use the Agent’s historical evidence tools for a separate
-                  search and validation process.
+                  results. The separate weight-search tool below freezes and validates
+                  a candidate plan independently.
                 </p>
                 <table>
                   <thead>
@@ -593,8 +593,7 @@ function App() {
                   </tbody>
                 </table>
               </div>
-            )}
-            {tab === "Agent" && <AgentPage data={data} evaluation={optimization && ["period", "category", "weather", "capacity", "typeWeights", "typeWeightMode"].every(key => JSON.stringify((optimization.filters as unknown as Record<string, unknown>)[key]) === JSON.stringify((config as unknown as Record<string, unknown>)[key])) ? optimization : null} evaluationTools={<>
+</details>
               <OptimizationPanel
                 result={optimization}
                 busy={optimizing}
@@ -610,7 +609,7 @@ function App() {
                   setTab("Plan comparison");
                 }}
               />
- </>} historical={{scope:activeConfig,selected:plan.selected,rows:plan.top.map((r:any)=>({...r,reportEvidence:selectEvents(data.events,activeConfig).filter((e:any)=>e.location===r.id).slice(-3)}))}} />}
+ </>} historical={{backtest:evaluation,scope:activeConfig,selected:plan.selected,rows:plan.top.map((r:any)=>({...r,reportEvidence:selectEvents(data.events,activeConfig).filter((e:any)=>e.location===r.id).slice(-3)}))}} />}
             {tab === "Data & method" && <DataMethodPage data={data} />}
           </div>
         </section>

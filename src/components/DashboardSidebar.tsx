@@ -1,5 +1,5 @@
 import { NavIcon } from "../NavIcon";
-export function DashboardSidebar({ pages, tab, setTab }: any) {
+export function DashboardSidebar({ pages, tab, setTab, data }: any) {
   return (
     <>
       <aside className="admin-sidebar">
@@ -10,8 +10,7 @@ export function DashboardSidebar({ pages, tab, setTab }: any) {
           </div>
         </div>
         <nav className="dashboard-nav" aria-label="Dashboard pages">
-          <div className="panel-subtitle">WORKSPACE</div>
-          {pages.map((page:string, i:number) => (
+          {pages.map((page:string) => (
             <button
               key={page}
               title={page}
@@ -20,14 +19,14 @@ export function DashboardSidebar({ pages, tab, setTab }: any) {
               aria-current={tab === page ? "page" : undefined}
               onClick={() => setTab(page)}
             >
-              <NavIcon index={page === "Agent" ? 8 : i - 1} />
+              <NavIcon index={{Agent:8,"Map preview":0,Evidence:1,"Plan comparison":2,"Forward outlook":4,"Weather context":5,"Data & method":7}[page] ?? 0} />
               <span className="nav-label">{page}</span>
             </button>
           ))}
         </nav>
         <div className="sidebar-footer">
           <i /> Historical operations lab
-          <small>2025 SNAPSHOT · MOUNTAIN TIME</small>
+          <small>{data.audit.first} ~ {data.audit.last} · MOUNTAIN TIME</small>
         </div>
       </aside>
     </>

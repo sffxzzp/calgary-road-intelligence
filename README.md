@@ -136,3 +136,5 @@ Agent is the default landing page and first sidebar entry, with its own conversa
 PR #2 matching rules were restored at user request: signalized intersections → visibility/signing; unsignalized intersections with Skeletal Road → ramp-meter candidate; qualifying stop-controlled arterials → signal; Skeletal Road segments → variable speed limit. This coarse rule set does not verify geometry or warrants. Annual columns label CMF arithmetic as demo estimates, not validated report/crash reductions. This supersedes earlier notes that ramp inference was removed.
 
 Historical plan evaluation lives in the Agent’s historical evidence tools. Run the deterministic weight search and holdout check there, then ask the Agent to explain the supplied results. Change analysis settings in Map preview; applying a plan still requires an explicit click.
+
+The Agent’s historical evidence tools also include current-plan backtests (90-day history followed by 30-day report coverage at three 2026 cutoffs); the assistant receives these observed baseline/candidate results for explanation.

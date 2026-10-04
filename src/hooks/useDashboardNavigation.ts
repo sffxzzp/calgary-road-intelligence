@@ -6,7 +6,6 @@ export const dashboardPages = [
   "Plan comparison",
   "Forward outlook",
   "Weather context",
-  "Historical evaluation",
   "Data & method",
 ];
 export const pageHash = (page: string) =>
