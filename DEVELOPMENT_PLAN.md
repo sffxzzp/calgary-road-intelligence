@@ -306,14 +306,11 @@ Key checks:
 
 An attractive map does not replace computational verification, and differences caused by weights do not alone establish effectiveness.
 
-## 13. Five-Minute Presentation Script
+## 13. Pitch and Live Demonstration
 
-1. 0:00–0:40: inspection resources are limited; counts give clues but conceal recent changes and recurrence.
-2. 0:40–1:10: show sources, coverage, cleaning and architecture.
-3. 1:10–2:20: open the annual map, inspect baseline Top 20 and real location records.
-4. 2:20–3:20: change periods/scoring, replan and explain two entering/exiting locations.
-5. 3:20–4:10: show historical evaluation and, if complete, weather or snow-route comparisons.
-6. 4:10–5:00: export the shortlist, explain trial use, value and required feedback.
+Follow [DEMO_GUIDE.md](DEMO_GUIDE.md) and the organizers’ Pitch guidance. Reserve two minutes for live interaction within a 4:10 pitch, leaving 30 seconds of rehearsal margin. Begin with a short introduction and a one-minute problem statement: municipal analysts face limited inspection capacity and fragmented traffic-report evidence; recent frequency is the transparent alternative.
+
+Open Agent from the default Map preview page, explain a supplied shortlist, inspect a historical report, compare the June 30 EB replay with recent rate, then save and export an analyst review. Keep algorithm detail for questions. Close with limitations, a measurable analyst pilot and a request for domain feedback. Report coverage is a proxy, not proven safety improvement.
 
 Choose real locations/scenarios beforehand and preserve fixed configurations. Never rewrite events or evaluation results for presentation.
 
@@ -359,7 +356,7 @@ Validation: calculate at multiple cutoffs using earlier records, then measure su
 2. Add cutoff, horizon and forward indicators, preserving versions/configuration.
 3. Add proactive map/shortlist and reactive comparisons with at least three change explanations.
 4. Complete temporal holdout evaluation and prepare a fixed historical replay.
-5. Present Reactive first, then the Proactive experiment, followed by limitations/improvements in the five-minute pitch.
+5. Present Reactive first, then the Proactive experiment, followed by limitations/improvements in the Pitch-format presentation.
 
 ### Pitch Limitations and Future Improvements
 
@@ -384,3 +381,13 @@ Enrich site characteristics with mapped signals, signs and crossings. Reproduce 
 ### Analyst feedback workflow
 
 Display mapped facilities with association limitations, then offer a context-aware inspection checklist and explicit saved review. Separate decisions, notes and checked review steps from verified field findings. Isolate local records by data snapshot, forecast period and location; include saved feedback in exported plans. Team synchronization and inspection outcomes remain later pilot work.
+
+## 18. Current Dashboard and Agent Workflow
+
+Navigation order is Map preview (default landing), Agent, Evidence, Plan comparison, Forward outlook, Weather context, and Data & method. Sidebar labels use icons without numeric prefixes or a WORKSPACE heading; the footer displays the actual local snapshot date range.
+
+Agent explains supplied historical, seven-day Poisson, monthly EB and annual EB evidence through an OpenAI-compatible server endpoint. It renders Markdown and readable location rankings. It does not execute field actions or replace statistical ranking. Credentials stay server-side; selected evidence and questions are sent to the provider.
+
+Historical evaluation and automatic weight search are consolidated into Agent’s historical evidence tools. Current-plan backtests compare 90-day history rankings against subsequent 30-day recorded-report coverage at three 2026 cutoffs. Weight search separately checks a frozen holdout. Pass computed results to Agent for explanation, invalidate stale results after setting changes, and require explicit confirmation to apply weights. Historical settings are changed in Map preview; Agent has no Analysis Controls.
+
+Data & method reads dashboard counts and dates from the loaded snapshot, distinguishes observed road/grid groups from full-inventory EB units, and lists traffic, geometry, yearly volumes, assets, weather and CMF sources. Rolling EB histories and latest-future fits must not be described as one fixed 2023–2025 training split.

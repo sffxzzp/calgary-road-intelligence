@@ -4,21 +4,19 @@ Follow the [hackathon slides’ Pitch section](https://canva.link/f4u4rlrgfjq2fk
 
 ## Preparation
 
-Verify the deployed Agent with a real question; preload forecast data and map tiles. Rehearse the June 30 replay and one future location. Use a clean review profile and keep a screenshot/export backup. Keep credentials off screen.
+The site opens on **Map preview**, with **Agent second** in the sidebar. Verify the deployed Agent with a real question; preload forecast data and map tiles. Rehearse the June 30 replay and one future location. Use a clean review profile and keep a screenshot/export backup. Keep credentials off screen.
 
 ## Introduction — 0:00–0:10
 
 “We’re [team name]. Calgary Road Intelligence helps road analysts decide which locations to inspect first, understand the evidence, and plan ahead.”
 
-## Problem — 0:10–1:10
+## Problem Statement — 0:10–1:10
 
-Use these talking points naturally; avoid reading every detail:
+**Say:** “Municipal road analysts need to decide where to send a limited inspection team. Our dashboard contains 27,805 traffic reports across 9,661 observed locations, including crashes, stalls and other disruptions. A long report list does not explain which sites deserve attention or preserve the reasoning behind a decision.
 
-- Municipal analysts have limited inspection capacity. Our dashboard contains **27,805 traffic reports**, including disruptions beyond confirmed crashes.
-- A report list alone does not explain location priorities or preserve the reasoning behind an inspection decision.
-- Recent report frequency is our transparent baseline. Across six exploratory monthly replays, EB covers **36.8 subsequent reports versus 33.0** at the same Top20 budget—about **12% more**. This is report coverage, not proven safety or financial benefit.
+“Ranking by recent report frequency is a useful starting point. We combine inspectable historical evidence with a forward outlook, then let analysts ask why a location is ranked and document their review. Across six exploratory monthly replays, EB covers 36.8 subsequent reports versus 33.0 for recent rate at the same Top20 budget—about 12% more. That measures report coverage, not proven safety or financial benefit.”
 
-“We connect historical evidence, a forward outlook, and a documented analyst decision.”
+**Transition:** “Let’s show how an analyst goes from reports to a review plan.”
 
 ## Live demonstration — 1:10–3:10
 

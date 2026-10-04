@@ -4,7 +4,7 @@ A browser dashboard for historical road-inspection priorities and experimental t
 
 ## Run
 
-Node.js 22+ is required. No API keys or backend are needed.
+Node.js 22+ is required. The map, ranking and forecasts run without API keys. Agent conversation additionally requires the server endpoint and an OpenAI-compatible provider; see Evidence Agent below.
 
 ```sh
 npm ci
@@ -12,7 +12,7 @@ npm run compress:data
 npm run dev
 ```
 
-Open http://localhost:5173. Traffic and weather snapshots are bundled locally; OpenFreeMap vector tiles and optional Google Fonts require network access.
+Open http://localhost:5173. Map preview is the default landing page; Agent is the second sidebar entry. Traffic and weather snapshots are bundled locally; OpenFreeMap vector tiles and optional Google Fonts require network access.
 
 ```sh
 npm test
@@ -34,7 +34,7 @@ Sources and processing details: [DATA_SOURCES.md](DATA_SOURCES.md). Current audi
 - Date, time-of-day, event-type and weather filters are drafts until **Apply evidence scope** is clicked. **Reset changes** discards edits.
 - Frequency, recent growth and recurring-date scoring, adjustable capacity and a raw-count baseline.
 - Persistent saved-plan comparison, ranking explanations and JSON report export.
-- Automatic search over 21 priority mixes using six 2023–2025 windows; independent July 2026 outcome check. Historical evaluation uses separate 2026 windows.
+- Automatic search over 21 priority mixes using six 2023–2025 windows; independent July 2026 outcome check. Current-plan backtests use separate 2026 windows. Both tools are under Agent → Historical applied scope, not separate pages.
 - Timeline playback with looping, webpage expansion and browser fullscreen.
 
 ### Event-type weighting
@@ -103,13 +103,11 @@ The dashboard's next30 outlook now uses pure EB, precomputed by `analysis/export
 
 Seven-day forecasts retain browser Ridge Poisson, collision targets and experimental learned-type options. These controls do not apply to EB30. EB unit evidence is displayed independently; reactive Top20 overlap and learned-weight imports are not calculated across different unit definitions. The 30-day choice follows exploratory average gains, not uniform superiority or operational validation.
 
-## Five-minute demo
+## Pitch and live demo
 
-1. Start with historical priorities: explain the evidence period, inspect one location and show its source reports. These are reported disruptions, not all confirmed crashes.
-2. Open Forward outlook → next30. Use the June 30 replay, generate the Top20, open the map and select a location to explain own-history versus similar-site contributions.
-3. Reveal later outcomes. Compare EB against the recent-rate baseline; explain that aggregate improvement is experimental and individual windows can lose.
-4. Switch to Future forecast. Show the complete-date cutoff, uncertainty intervals and export. No future accuracy is claimed.
-5. Close with the practical proposal: analysts review a shortlist, confirm local context and record whether inspection was useful. Better crash/severity data, exposure and prospective feedback are the next validation steps.
+Use [DEMO_GUIDE.md](DEMO_GUIDE.md) for the current presentation: 10-second introduction, one-minute problem statement, two-minute live demonstration, and one-minute closing (4:10 total, with 30 seconds of rehearsal margin). The problem statement names the proposed municipal analyst customer, limited inspection capacity, fragmented report evidence, and the recent-rate baseline. Keep report-coverage results separate from unverified safety or financial benefits.
+
+The site opens on Map preview. During the demo, open Agent for an evidence-grounded explanation, inspect one historical source report, show the June 30 monthly replay, then save and export a future-location review. Have a genuine prepared Agent response available if provider latency interrupts the live flow.
 
 The next7 Poisson and annual EB modes are additional planning horizons; their units and controls differ. Keep the main presentation focused on historical review and next30 outlook.
 
@@ -119,22 +117,22 @@ Monthly location evidence displays mapped facility counts and proximity limitati
 
 Monthly forecast map points open the same location evidence as table rows; selecting a row recentres an open map. Review-status filtering affects the model Top20 table only, preserving the full forecast map and evaluation. Export inspection shortlist downloads the currently filtered Top20 locations with coordinates, predictions, facilities and saved reviews.
 
-The presentation should follow [DEMO_GUIDE.md](DEMO_GUIDE.md), aligned to the organizers' Pitch slides: short introduction, one-minute problem statement, 1–2 minute solution/demo, and 1–2 minute closing. The earlier five-minute click-through is background preparation; this pitch structure takes precedence.
+The presentation should follow [DEMO_GUIDE.md](DEMO_GUIDE.md), aligned to the organizers' Pitch slides: short introduction, one-minute problem statement, 1–2 minute solution/demo, and 1–2 minute closing. The current guide takes precedence over earlier click-through scripts.
 
 Annual outlook supports confirmed selection of precomputed month-end replay cutoffs from 2025 onward, alongside the latest future forecast. Run `OPENBLAS_NUM_THREADS=1 analysis/.venv/bin/python analysis/export_annual_replays.py` to regenerate per-cutoff gzip files and their index. Historical replay uses fixed five-year history, independent of later model-window selection. Incomplete observation periods are explicitly marked; current-geometry/undated-asset caveats still apply.
 
 ## Evidence Agent
 
-The Agent page chats with selected monthly EB Top20 or one location, including source evidence, evaluation and saved local reviews. Configure server-only `AGENT_BASE_URL` (including `/v1` if required), `AGENT_MODEL` and `AGENT_API_KEY` in Vercel, then redeploy. The provider must support OpenAI-compatible Chat Completions. No key is included in the browser. Local API testing requires `vercel dev`; plain Vite serves only the UI.
+The Agent page chats with selected historical, seven-day, monthly or annual evidence, either a supplied shortlist or one location. Context includes available source evidence, model/evaluation details and saved monthly reviews. Configure server-only `AGENT_BASE_URL` (including `/v1` if required), `AGENT_MODEL` and `AGENT_API_KEY` in Vercel, then redeploy. The provider must support OpenAI-compatible Chat Completions. No key is included in the browser. Local API testing requires `vercel dev`; plain Vite serves only the UI.
 
-Questions and selected evidence are sent to the configured provider. Responses are model-generated and require review; the agent cannot execute changes or verify site conditions. The endpoint has request-size limits and timeout, but no user authentication/rate limiting: add access controls before broadly sharing a paid-provider deployment. Annual/seven-day context is not yet included.
+Questions and selected evidence are sent to the configured provider. Responses are model-generated and require review; the agent cannot execute changes or verify site conditions. The endpoint has request-size limits and timeout, but no user authentication/rate limiting: add access controls before broadly sharing a paid-provider deployment.
 
 Agent evidence sources now include the applied historical shortlist (with matching filtered source samples), generated latest-future seven-day Poisson, monthly EB replays/future, and annual latest/replay snapshots. Seven-day target/weighting settings require regenerating context before asking. Every request includes curated project purpose, methods, provenance, page workflows and interpretation limits. It does not automatically read arbitrary repository files or all reports, and model understanding is not guaranteed by supplying context. Real provider calls remain unverified until configured.
 
-Agent is the default landing page and first sidebar entry, with its own conversation icon. Assistant prose renders Markdown/GFM (headings, lists, tables and code); raw HTML is not enabled and links use safe URL handling. Existing page deep links remain valid.
+Map preview is the default landing page and first sidebar entry; Agent is second, with its own conversation icon. Navigation continues with Evidence, Plan comparison, Forward outlook, Weather context and Data & method. Assistant prose renders Markdown/GFM (headings, lists, tables and code); raw HTML is not enabled and links use safe URL handling. Current page deep links remain valid; removed evaluation-page links fall back to Map preview.
 
 PR #2 matching rules were restored at user request: signalized intersections → visibility/signing; unsignalized intersections with Skeletal Road → ramp-meter candidate; qualifying stop-controlled arterials → signal; Skeletal Road segments → variable speed limit. This coarse rule set does not verify geometry or warrants. Annual columns label CMF arithmetic as demo estimates, not validated report/crash reductions. This supersedes earlier notes that ramp inference was removed.
 
-Historical plan evaluation lives in the Agent’s historical evidence tools. Run the deterministic weight search and holdout check there, then ask the Agent to explain the supplied results. Change analysis settings in Map preview; applying a plan still requires an explicit click.
+Historical plan evaluation lives in the Agent’s historical evidence tools. Run the deterministic weight search and holdout check there, then ask the Agent to explain the supplied results. Agent has no Analysis Controls: change historical settings in Map preview. Applying a plan still requires an explicit click.
 
 The Agent’s historical evidence tools also include current-plan backtests (90-day history followed by 30-day report coverage at three 2026 cutoffs); the assistant receives these observed baseline/candidate results for explanation.
